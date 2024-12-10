@@ -1,8 +1,9 @@
 =======================================
-       Welcome to Wallet Backend
+       Welcome to ${spring.application.name}
 =======================================
 Application: ${spring.application.name}
+Profile: ${spring.profiles.active}
 Port: ${server.port}
-Spring Boot: ${spring-boot.version}
 Java: ${java.version}
+Spring Boot: ${spring-boot.version}
 =======================================
