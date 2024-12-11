@@ -13,10 +13,25 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     // ResourceNotFoundException
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<GlobalResponse> handleResourceNotFoundException(ResourceNotFoundException ex, HttpServletRequest request) {
+        GlobalResponse errorResponse = createErrorResponse(ex, request);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
 
     // EntityAlreadyExistsException
+    @ExceptionHandler(EntityAlreadyExists.class)
+    public ResponseEntity<GlobalResponse> handleEntityAlreadyExistsException(EntityAlreadyExists ex, HttpServletRequest request) {
+        GlobalResponse errorResponse = createErrorResponse(ex, request);
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
 
-    // BadRequestException
+    // BadRequestException ! No verificado
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<GlobalResponse> handleBadRequestException(BadRequestException ex, HttpServletRequest request) {
+        GlobalResponse errorResponse = createErrorResponse(ex, request);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
 
     // MethodArgumentNotValidException
 
@@ -24,7 +39,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<GlobalResponse> handleInternalServerError(Exception ex, HttpServletRequest request) {
         GlobalResponse errorResponse = createErrorResponse(ex, request);
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
 
     // Private methods
