@@ -1,5 +1,6 @@
 package com.tineo.wallet_backend.entity;
 
+import com.tineo.wallet_backend.role.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,4 +27,7 @@ public class UserModel {
 
     @Column(nullable = false)
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 }
