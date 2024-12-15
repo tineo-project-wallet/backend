@@ -2,7 +2,6 @@ package com.tineo.wallet_backend.service;
 
 import com.tineo.wallet_backend.entity.UserModel;
 import com.tineo.wallet_backend.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
