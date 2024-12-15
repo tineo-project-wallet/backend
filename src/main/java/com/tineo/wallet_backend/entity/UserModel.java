@@ -19,9 +19,10 @@ public class UserModel {
     @Column(name = "user_id")
     private Long id;
 
+    @Column(length = 100)
     private String name;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 45)
     private String username;
 
     @Column(nullable = false)
