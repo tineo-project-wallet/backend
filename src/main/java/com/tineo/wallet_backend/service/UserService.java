@@ -1,5 +1,6 @@
 package com.tineo.wallet_backend.service;
 
+import com.tineo.wallet_backend.config.Constant;
 import com.tineo.wallet_backend.dto.user.UserRequestDTO;
 import com.tineo.wallet_backend.dto.user.UserResponseDTO;
 import com.tineo.wallet_backend.exception.ResourceNotFoundException;
@@ -34,7 +35,7 @@ public class UserService implements GenericService<UserResponseDTO, UserRequestD
     public UserResponseDTO findById(Long id) {
         return userRepository.findById(id)
                 .map(userMappper::toDTO)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(Constant.USER_NOT_FOUND_BY_ID + id));
     }
 
     @Override

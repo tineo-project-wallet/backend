@@ -1,5 +1,6 @@
 package com.tineo.wallet_backend.controller;
 
+import com.tineo.wallet_backend.config.Constant;
 import com.tineo.wallet_backend.dto.GlobalResponse;
 import com.tineo.wallet_backend.dto.user.UserResponseDTO;
 import com.tineo.wallet_backend.service.UserService;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping(Constant.API_VERSION_USERS)
 @RequiredArgsConstructor
 public class UserController {
 
@@ -25,7 +26,7 @@ public class UserController {
     public ResponseEntity<GlobalResponse> findAll() {
         List<UserResponseDTO> users = userService.findAll();
 
-        String message = users.isEmpty() ? "No users found" : "Found users";
+        String message = users.isEmpty() ? Constant.USER_NOT_FOUND : Constant.USER_FOUND;
         HttpStatus status = users.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK;
 
         return ResponseEntity.status(status).body(GlobalResponse.builder()
@@ -40,7 +41,7 @@ public class UserController {
     public ResponseEntity<GlobalResponse> findById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(GlobalResponse.builder()
                 .ok(true)
-                .message("User by id found")
+                .message(Constant.USER_BY_ID_FOUND)
                 .data(userService.findById(id))
                 .timestamp(LocalDateTime.now())
                 .build());
