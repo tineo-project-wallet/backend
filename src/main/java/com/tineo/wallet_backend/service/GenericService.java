@@ -1,10 +1,9 @@
 package com.tineo.wallet_backend.service;
 
 import org.springframework.data.domain.Page;
-
 import java.util.List;
 
-public interface GenericService<T> {
+public interface GenericService<T, R> {
 
     List<T> findAll();
 
@@ -12,9 +11,9 @@ public interface GenericService<T> {
 
     T findById(Long id);
 
-    T save(T entity);
+    T save(R entity);
 
-    T update(T entity);
+    T update(R entity);
 
     void delete(Long id);
 }
