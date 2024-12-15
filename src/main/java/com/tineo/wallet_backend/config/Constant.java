@@ -4,6 +4,10 @@ public class Constant {
 
     public static final String API_VERSION = "/api/v1";
 
+    // General messages
+    public static final String ERROR_PARAMETER_TYPE_MISMATCH = "The parameter '%s' must be of type '%s'";
+    public static final String ERROR_DETAILS = "[%s] %s";
+
     // User messages
     public static final String API_VERSION_USERS = API_VERSION + "/users";
 
