@@ -53,7 +53,10 @@ public class UserService implements GenericService<UserResponseDTO, UserRequestD
     }
 
     @Override
-    public void delete(Long id) {
-
+    public Boolean deleteById(Long id) {
+        userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(Constant.USER_NOT_FOUND_BY_ID + id));
+        userRepository.deleteById(id);
+        return true;
     }
 }

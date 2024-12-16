@@ -6,6 +6,7 @@ import com.tineo.wallet_backend.dto.user.UserResponseDTO;
 import com.tineo.wallet_backend.exception.BadRequestException;
 import com.tineo.wallet_backend.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,13 +53,22 @@ public class UserController {
                 .build());
     }
 
-
     @GetMapping(Constant.API_VERSION_USERS_ID)
     public ResponseEntity<GlobalResponse> findById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(GlobalResponse.builder()
                 .ok(true)
                 .message(Constant.USER_BY_ID_FOUND)
                 .data(userService.findById(id))
+                .timestamp(LocalDateTime.now())
+                .build());
+    }
+
+    @DeleteMapping(Constant.API_VERSION_USERS_ID)
+    public ResponseEntity<GlobalResponse> deleteById(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(GlobalResponse.builder()
+                .ok(true)
+                .message(Constant.USER_BY_ID_DELETED)
+                .data(userService.deleteById(id))
                 .timestamp(LocalDateTime.now())
                 .build());
     }

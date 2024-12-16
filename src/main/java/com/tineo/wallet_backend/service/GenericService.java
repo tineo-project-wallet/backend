@@ -1,6 +1,7 @@
 package com.tineo.wallet_backend.service;
 
 import org.springframework.data.domain.Page;
+
 import java.util.List;
 
 public interface GenericService<T, R> {
@@ -15,5 +16,5 @@ public interface GenericService<T, R> {
 
     T update(R entity);
 
-    void delete(Long id);
+    Boolean deleteById(Long id);
 }
