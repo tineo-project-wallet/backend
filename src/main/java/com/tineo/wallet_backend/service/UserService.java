@@ -8,6 +8,8 @@ import com.tineo.wallet_backend.mapper.UserMappper;
 import com.tineo.wallet_backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +30,9 @@ public class UserService implements GenericService<UserResponseDTO, UserRequestD
 
     @Override
     public Page<UserResponseDTO> findAll(int page, int size) {
-        return null;
+        Pageable pageable = PageRequest.of(page, size);
+        return userRepository.findAll(pageable)
+                .map((userMappper::toDTO));
     }
 
     @Override
