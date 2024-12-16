@@ -53,7 +53,6 @@ public class UserService implements GenericService<UserResponseDTO, UserRequestD
         }
 
         UserModel newUser = userMappper.toEntity(entity);
-        System.out.println(newUser);
         userRepository.save(newUser);
         return userMappper.toDTO(newUser);
     }

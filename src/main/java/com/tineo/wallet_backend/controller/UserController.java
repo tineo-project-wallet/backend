@@ -7,7 +7,6 @@ import com.tineo.wallet_backend.dto.user.UserResponseDTO;
 import com.tineo.wallet_backend.exception.BadRequestException;
 import com.tineo.wallet_backend.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
