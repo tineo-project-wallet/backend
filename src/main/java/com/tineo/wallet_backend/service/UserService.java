@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -46,20 +47,34 @@ public class UserService implements GenericService<UserResponseDTO, UserRequestD
     }
 
     @Override
-    public UserResponseDTO save(UserRequestDTO entity) {
-        Optional<UserModel> userModel = userRepository.findByUsername(entity.getUsername());
-        if (userModel.isPresent()) {
+    public UserResponseDTO save(UserRequestDTO request) {
+        Optional<UserModel> userModelExists = userRepository.findByUsername(request.getUsername());
+        if (userModelExists.isPresent()) {
             throw new EntityAlreadyExists(Constant.USER_USERNAME_EXISTS);
         }
 
-        UserModel newUser = userMappper.toEntity(entity);
+        UserModel newUser = userMappper.toEntity(request);
         userRepository.save(newUser);
         return userMappper.toDTO(newUser);
     }
 
     @Override
-    public UserResponseDTO update(UserRequestDTO entity) {
-        return null;
+    public UserResponseDTO update(UserRequestDTO request, Long id) {
+        Optional<UserModel> userModelFound = userRepository.findById(id);
+        if (userModelFound.isEmpty()) {
+            throw new ResourceNotFoundException(Constant.USER_NOT_FOUND_BY_ID + id);
+        }
+
+        Optional<UserModel> userModelExists = userRepository.findByUsername(request.getUsername());
+        if (userModelExists.isPresent() && !Objects.equals(userModelExists.get().getId(), userModelFound.get().getId())) {
+            throw new EntityAlreadyExists(Constant.USER_USERNAME_EXISTS);
+        }
+
+        UserModel userModelUpdated = userMappper.toEntity(request);
+        // todo Metodo para actualizar cada valor, manejar name por defecto
+        userModelUpdated.setId(userModelFound.get().getId());
+        userRepository.save(userModelUpdated);
+        return userMappper.toDTO(userModelUpdated);
     }
 
     @Override

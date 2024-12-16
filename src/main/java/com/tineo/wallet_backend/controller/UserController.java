@@ -73,6 +73,16 @@ public class UserController {
                 .build());
     }
 
+    @PutMapping(Constant.API_VERSION_USERS_ID)
+    public ResponseEntity<GlobalResponse> update(@RequestBody UserRequestDTO user, @PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(GlobalResponse.builder()
+                .ok(true)
+                .message(Constant.USER_UPDATED)
+                .data(userService.update(user, id))
+                .timestamp(LocalDateTime.now())
+                .build());
+    }
+
     @DeleteMapping(Constant.API_VERSION_USERS_ID)
     public ResponseEntity<GlobalResponse> deleteById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(GlobalResponse.builder()

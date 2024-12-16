@@ -12,9 +12,9 @@ public interface GenericService<T, R> {
 
     T findById(Long id);
 
-    T save(R entity);
+    T save(R request);
 
-    T update(R entity);
+    T update(R request, Long id);
 
     Boolean deleteById(Long id);
 }
