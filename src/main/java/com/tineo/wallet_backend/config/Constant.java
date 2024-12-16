@@ -10,6 +10,8 @@ public class Constant {
 
     // User messages
     public static final String API_VERSION_USERS = API_VERSION + "/users";
+    public static final String API_VERSION_USERS_ID = "/{id}";
+    public static final String API_VERSION_USERS_PAGINATE = "/paginate";
 
     public static final String USER_FOUND = "Users found";
     public static final String USER_NOT_FOUND = "No users found";

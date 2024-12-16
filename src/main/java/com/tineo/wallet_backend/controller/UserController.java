@@ -35,7 +35,7 @@ public class UserController {
                 .build());
     }
 
-    @GetMapping("/pageable")
+    @GetMapping(Constant.API_VERSION_USERS_PAGINATE)
     public ResponseEntity<GlobalResponse> findAllPageable(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -53,7 +53,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping(Constant.API_VERSION_USERS_ID)
     public ResponseEntity<GlobalResponse> findById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(GlobalResponse.builder()
                 .ok(true)
