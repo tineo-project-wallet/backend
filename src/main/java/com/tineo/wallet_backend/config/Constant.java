@@ -21,6 +21,10 @@ public class Constant {
 
     public static final String USER_BY_ID_DELETED = "User by id deleted";
 
+    public static final String USER_USERNAME_EXISTS = "User by username already exists";
+
+    public static final String USER_CREATED = "User created";
+
     public static final String PAGE_SIZE_FOUND = "Page and size found";
     public static final String PAGE_SIZE_ERROR = "Page and size must be greater than 0";
 }

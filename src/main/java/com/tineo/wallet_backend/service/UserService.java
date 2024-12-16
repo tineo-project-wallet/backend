@@ -3,6 +3,8 @@ package com.tineo.wallet_backend.service;
 import com.tineo.wallet_backend.config.Constant;
 import com.tineo.wallet_backend.dto.user.UserRequestDTO;
 import com.tineo.wallet_backend.dto.user.UserResponseDTO;
+import com.tineo.wallet_backend.entity.UserModel;
+import com.tineo.wallet_backend.exception.EntityAlreadyExists;
 import com.tineo.wallet_backend.exception.ResourceNotFoundException;
 import com.tineo.wallet_backend.mapper.UserMappper;
 import com.tineo.wallet_backend.repository.UserRepository;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -44,7 +47,15 @@ public class UserService implements GenericService<UserResponseDTO, UserRequestD
 
     @Override
     public UserResponseDTO save(UserRequestDTO entity) {
-        return null;
+        Optional<UserModel> userModel = userRepository.findByUsername(entity.getUsername());
+        if (userModel.isPresent()) {
+            throw new EntityAlreadyExists(Constant.USER_USERNAME_EXISTS);
+        }
+
+        UserModel newUser = userMappper.toEntity(entity);
+        System.out.println(newUser);
+        userRepository.save(newUser);
+        return userMappper.toDTO(newUser);
     }
 
     @Override

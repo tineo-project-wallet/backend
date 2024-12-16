@@ -2,6 +2,7 @@ package com.tineo.wallet_backend.controller;
 
 import com.tineo.wallet_backend.config.Constant;
 import com.tineo.wallet_backend.dto.GlobalResponse;
+import com.tineo.wallet_backend.dto.user.UserRequestDTO;
 import com.tineo.wallet_backend.dto.user.UserResponseDTO;
 import com.tineo.wallet_backend.exception.BadRequestException;
 import com.tineo.wallet_backend.service.UserService;
@@ -59,6 +60,16 @@ public class UserController {
                 .ok(true)
                 .message(Constant.USER_BY_ID_FOUND)
                 .data(userService.findById(id))
+                .timestamp(LocalDateTime.now())
+                .build());
+    }
+
+    @PostMapping
+    public ResponseEntity<GlobalResponse> save(@RequestBody UserRequestDTO user) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(GlobalResponse.builder()
+                .ok(true)
+                .message(Constant.USER_CREATED)
+                .data(userService.save(user))
                 .timestamp(LocalDateTime.now())
                 .build());
     }

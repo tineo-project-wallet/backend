@@ -12,8 +12,9 @@ import org.hibernate.validator.constraints.Length;
 @NoArgsConstructor
 @Builder
 public class UserRequestDTO {
+    @Builder.Default
     @Length(max = 100)
-    private String name;
+    private String name = "User";
 
     @NotNull
     @Length(max = 45)

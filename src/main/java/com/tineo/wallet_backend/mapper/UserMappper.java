@@ -15,8 +15,8 @@ public class UserMappper {
                 .build();
     }
 
-    public UserRequestDTO toEntity(UserRequestDTO userRequestDTO) {
-        return UserRequestDTO.builder()
+    public UserModel toEntity(UserRequestDTO userRequestDTO) {
+        return UserModel.builder()
                 .name(userRequestDTO.getName())
                 .username(userRequestDTO.getUsername())
                 .password(userRequestDTO.getPassword())
