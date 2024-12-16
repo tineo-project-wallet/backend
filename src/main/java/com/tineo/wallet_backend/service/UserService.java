@@ -70,11 +70,9 @@ public class UserService implements GenericService<UserResponseDTO, UserRequestD
             throw new EntityAlreadyExists(Constant.USER_USERNAME_EXISTS);
         }
 
-        UserModel userModelUpdated = userMappper.toEntity(request);
-        // todo Metodo para actualizar cada valor, manejar name por defecto
-        userModelUpdated.setId(userModelFound.get().getId());
-        userRepository.save(userModelUpdated);
-        return userMappper.toDTO(userModelUpdated);
+        UserModel userUpdated = updateUserModel(userModelFound.get(), userMappper.toEntity(request));
+        userRepository.save(userUpdated);
+        return userMappper.toDTO(userUpdated);
     }
 
     @Override
@@ -83,5 +81,15 @@ public class UserService implements GenericService<UserResponseDTO, UserRequestD
                 .orElseThrow(() -> new ResourceNotFoundException(Constant.USER_NOT_FOUND_BY_ID + id));
         userRepository.deleteById(id);
         return true;
+    }
+
+    // Private methods
+    private UserModel updateUserModel(UserModel userFound, UserModel userNewAttributes) {
+        if (!Objects.equals(userNewAttributes.getName(), "default_user_name")) {
+            userFound.setName(userNewAttributes.getName());
+        }
+        userFound.setUsername(userNewAttributes.getUsername());
+        userFound.setPassword(userNewAttributes.getPassword());
+        return userFound;
     }
 }

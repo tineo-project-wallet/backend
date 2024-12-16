@@ -3,7 +3,7 @@
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `app_user` (
   `user_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) DEFAULT 'User',
+  `name` VARCHAR(100) DEFAULT 'default_user_name',
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`user_id`)
