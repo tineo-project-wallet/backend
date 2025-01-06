@@ -1,5 +1,6 @@
 package com.tineo.wallet_backend.dto.user;
 
+import com.tineo.wallet_backend.role.UserRole;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,4 +24,7 @@ public class UserRequestDTO {
     @NotNull
     @Length(max = 255)
     private String password;
+
+    @Builder.Default
+    private UserRole role = UserRole.ROLE_USER;
 }

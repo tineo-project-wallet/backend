@@ -12,6 +12,7 @@ public class UserMappper {
                 .id(userModel.getId())
                 .name(userModel.getName())
                 .username(userModel.getUsername())
+                .role(userModel.getRole())
                 .build();
     }
 
@@ -20,6 +21,7 @@ public class UserMappper {
                 .name(userRequestDTO.getName())
                 .username(userRequestDTO.getUsername())
                 .password(userRequestDTO.getPassword())
+                .role(userRequestDTO.getRole())
                 .build();
     }
 }
