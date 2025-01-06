@@ -1,7 +1,7 @@
 package com.tineo.wallet_backend.controller;
 
 import com.tineo.wallet_backend.config.Constant;
-import com.tineo.wallet_backend.dto.GlobalResponse;
+import com.tineo.wallet_backend.dto.global.GlobalResponse;
 import com.tineo.wallet_backend.dto.user.UserRequestDTO;
 import com.tineo.wallet_backend.dto.user.UserResponseDTO;
 import com.tineo.wallet_backend.exception.BadRequestException;

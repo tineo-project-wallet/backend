@@ -1,7 +1,7 @@
 package com.tineo.wallet_backend.exception;
 
 import com.tineo.wallet_backend.config.Constant;
-import com.tineo.wallet_backend.dto.GlobalResponse;
+import com.tineo.wallet_backend.dto.global.GlobalResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

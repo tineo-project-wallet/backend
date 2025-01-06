@@ -1,4 +1,4 @@
-package com.tineo.wallet_backend.dto;
+package com.tineo.wallet_backend.dto.global;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
