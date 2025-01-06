@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS `app_user` (
   `name` VARCHAR(100) DEFAULT 'default_user_name',
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
+  `role` VARCHAR(40) NOT NULL CHECK (`role` IN ('ROLE_ADMIN', 'ROLE_USER')),
   PRIMARY KEY (`user_id`)
 );
 

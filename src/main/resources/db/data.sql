@@ -1,8 +1,8 @@
 -- Insertar datos en app_user
 -- 10 registros
-INSERT INTO `app_user` (`name`, `username`, `password`) VALUES
-    ('Tineo', 'tineo', 'password'),
-    ('Luis', 'luis', 'password'),
-    ('Juan', 'juan', 'password'),
-    ('Pedro', 'pedro', 'password'),
-    ('Maria', 'maria', 'password');
+INSERT INTO `app_user` (`name`, `username`, `password`, `role`) VALUES
+    ('Tineo', 'tineo', 'password', 'ROLE_ADMIN'),
+    ('Luis', 'luis', 'password', 'ROLE_ADMIN'),
+    ('Juan', 'juan', 'password', 'ROLE_USER'),
+    ('Pedro', 'pedro', 'password', 'ROLE_USER'),
+    ('Maria', 'maria', 'password', 'ROLE_USER');
