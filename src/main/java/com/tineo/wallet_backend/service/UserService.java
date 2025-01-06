@@ -90,6 +90,7 @@ public class UserService implements GenericService<UserResponseDTO, UserRequestD
         }
         userFound.setUsername(userNewAttributes.getUsername());
         userFound.setPassword(userNewAttributes.getPassword());
+        userFound.setRole(userNewAttributes.getRole());
         return userFound;
     }
 }
