@@ -6,6 +6,7 @@ import com.tineo.wallet_backend.dto.user.UserRequestDTO;
 import com.tineo.wallet_backend.dto.user.UserResponseDTO;
 import com.tineo.wallet_backend.exception.BadRequestException;
 import com.tineo.wallet_backend.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,7 +65,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<GlobalResponse> save(@RequestBody UserRequestDTO user) {
+    public ResponseEntity<GlobalResponse> save(@RequestBody @Valid UserRequestDTO user) {
         return ResponseEntity.status(HttpStatus.CREATED).body(GlobalResponse.builder()
                 .ok(true)
                 .message(Constant.USER_CREATED)
@@ -74,7 +75,7 @@ public class UserController {
     }
 
     @PutMapping(Constant.API_VERSION_USERS_ID)
-    public ResponseEntity<GlobalResponse> update(@RequestBody UserRequestDTO user, @PathVariable Long id) {
+    public ResponseEntity<GlobalResponse> update(@RequestBody @Valid UserRequestDTO user, @PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(GlobalResponse.builder()
                 .ok(true)
                 .message(Constant.USER_UPDATED)
