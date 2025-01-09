@@ -18,6 +18,7 @@ public class Constant {
 
     public static final String USER_BY_ID_FOUND = "User by id found";
     public static final String USER_NOT_FOUND_BY_ID = "User not found with id: ";
+    public static final String USER_NOT_FOUND_BY_USERNAME = "User not found with username: ";
 
     public static final String USER_BY_ID_DELETED = "User by id deleted";
 
