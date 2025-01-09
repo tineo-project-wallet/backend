@@ -35,10 +35,6 @@ public class JwtService {
                 .compact();
     }
 
-    public String extractUsernameFromToken(String token) {
-        return extractAllClaims(token).getSubject();
-    }
-
     public void validateToken(String token) {
         try {
             extractAllClaims(token);
@@ -49,6 +45,10 @@ public class JwtService {
         } catch (IllegalArgumentException e) {
             throw new JwtException(Constant.JWT_ILLEGAL_TOKEN + e.getMessage());
         }
+    }
+
+    public String extractUsernameFromToken(String token) {
+        return extractAllClaims(token).getSubject();
     }
 
     // private methods
