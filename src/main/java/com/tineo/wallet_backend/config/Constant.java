@@ -36,4 +36,10 @@ public class Constant {
     public static final String JWT_INVALID_TOKEN = "Token is invalid - ";
     public static final String JWT_ILLEGAL_TOKEN = "Token is malformed - ";
 
+    // Auth messages
+    public static final String API_VESION_AUTH = API_VERSION + "/auth";
+
+    // H2 route
+    public static final String H2_ENDPOINT = "/h2-console";
+
 }
