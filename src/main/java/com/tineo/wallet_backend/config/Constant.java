@@ -31,6 +31,7 @@ public class Constant {
     public static final String PAGE_SIZE_ERROR = "Page and size must be greater than 0";
 
     // Error jwt messages
+    public static final String JWT_ERROR = "JWT error";
     public static final String JWT_EXPIRED_TOKEN = "Token has expired - ";
     public static final String JWT_INVALID_TOKEN = "Token is invalid - ";
     public static final String JWT_ILLEGAL_TOKEN = "Token is malformed - ";
