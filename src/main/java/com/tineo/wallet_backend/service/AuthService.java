@@ -37,7 +37,6 @@ public class AuthService {
         String username = userRequestDTO.getUsername();
         String password = userRequestDTO.getPassword();
 
-        userRequestDTO.setPassword(passwordEncoder.encode(password));
         userRequestDTO.setRole(UserRole.ROLE_USER);
         userService.save(userRequestDTO);
 
