@@ -34,6 +34,8 @@ public class SecurityConfig {
                         .requestMatchers(Constant.API_ENDPOINT_AUTH + "/**").permitAll()
                         .requestMatchers(Constant.API_ENDPOINT_USERS + "/**").authenticated()
                         .requestMatchers(Constant.ENDPOINT_H2 + "/**").permitAll()
+                        .requestMatchers(Constant.ENDPOINT_SWAGGER + "/**").permitAll()
+                        .requestMatchers(Constant.ENDPOINT_SWAGGER_RESOURCES + "/**").permitAll()
                         .anyRequest().denyAll()
                 );
         return http.build();

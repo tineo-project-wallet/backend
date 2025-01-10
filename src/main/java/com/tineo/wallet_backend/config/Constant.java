@@ -49,4 +49,8 @@ public class Constant {
 
     // H2 - endpoint
     public static final String ENDPOINT_H2 = "/h2-console";
+
+    // Swagger - endpoint
+    public static final String ENDPOINT_SWAGGER = "/swagger-ui";
+    public static final String ENDPOINT_SWAGGER_RESOURCES = "/v3/api-docs";
 }
