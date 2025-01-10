@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.Optional;
 public class UserService implements GenericService<UserResponseDTO, UserRequestDTO> {
     private final UserRepository userRepository;
     private final UserMappper userMappper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserResponseDTO> findAll() {
@@ -48,6 +50,8 @@ public class UserService implements GenericService<UserResponseDTO, UserRequestD
 
     @Override
     public UserResponseDTO save(UserRequestDTO request) {
+        request.setPassword(passwordEncoder.encode(request.getPassword()));
+
         Optional<UserModel> userModelExists = userRepository.findByUsername(request.getUsername());
         if (userModelExists.isPresent()) {
             throw new EntityAlreadyExists(Constant.USER_USERNAME_EXISTS);

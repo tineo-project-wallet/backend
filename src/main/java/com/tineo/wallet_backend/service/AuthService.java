@@ -7,6 +7,7 @@ import com.tineo.wallet_backend.dto.user.UserRequestDTO;
 import com.tineo.wallet_backend.entity.UserModel;
 import com.tineo.wallet_backend.exception.ResourceNotFoundException;
 import com.tineo.wallet_backend.repository.UserRepository;
+import com.tineo.wallet_backend.role.UserRole;
 import com.tineo.wallet_backend.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,6 +38,7 @@ public class AuthService {
         String password = userRequestDTO.getPassword();
 
         userRequestDTO.setPassword(passwordEncoder.encode(password));
+        userRequestDTO.setRole(UserRole.ROLE_USER);
         userService.save(userRequestDTO);
 
         return buildResponse(username);

@@ -39,6 +39,7 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.GET, Constant.API_ENDPOINT_USERS).hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, Constant.API_ENDPOINT_USERS + Constant.ENDPOINT_USERS_PAGINATE).hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, Constant.API_ENDPOINT_USERS).hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, Constant.API_ENDPOINT_USERS + Constant.ENDPOINT_USERS_ID).hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.GET, Constant.API_ENDPOINT_USERS + Constant.ENDPOINT_USERS_ID).hasAnyRole("ADMIN", "USER")
