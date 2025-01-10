@@ -6,7 +6,6 @@ import com.tineo.wallet_backend.dto.global.GlobalResponse;
 import com.tineo.wallet_backend.entity.UserModel;
 import com.tineo.wallet_backend.exception.ResourceNotFoundException;
 import com.tineo.wallet_backend.repository.UserRepository;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -48,10 +47,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     username, null, userFound.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         } catch (JwtException e) {
-            sendResponse(response, HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
+            sendResponse(request, response, HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
             return;
         } catch (Exception e) {
-            sendResponse(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+            sendResponse(request, response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
             return;
         }
 
@@ -59,11 +58,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     // private methods
-    private void sendResponse(HttpServletResponse response, Integer httpStatus, String message) throws IOException {
+    private void sendResponse(HttpServletRequest request, HttpServletResponse response, Integer httpStatus, String message) throws IOException {
         GlobalResponse errorResponse = GlobalResponse.builder()
                 .ok(false)
-                .message(Constant.JWT_ERROR)
-                .details(message)
+                .message(message)
+                .details(String.format(Constant.ERROR_DETAILS, request.getMethod(), request.getRequestURI()))
                 .build();
 
         response.setStatus(httpStatus);

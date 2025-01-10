@@ -31,13 +31,17 @@ public class Constant {
     public static final String PAGE_SIZE_ERROR = "Page and size must be greater than 0";
 
     // Error jwt messages
-    public static final String JWT_ERROR = "JWT error";
-    public static final String JWT_EXPIRED_TOKEN = "Token has expired - ";
-    public static final String JWT_INVALID_TOKEN = "Token is invalid - ";
-    public static final String JWT_ILLEGAL_TOKEN = "Token is malformed - ";
+    public static final String ERROR_JWT_EXPIRED_TOKEN = "Token has expired - ";
+    public static final String ERROR_JWT_INVALID_TOKEN = "Token is invalid - ";
+    public static final String ERROR_JWT_ILLEGAL_TOKEN = "Token is malformed - ";
 
     // Auth messages
     public static final String API_VESION_AUTH = API_VERSION + "/auth";
+    public static final String API_VERSION_AUTH_LOGIN = "/login";
+    public static final String API_VERSION_AUTH_REGISTER = "/register";
+
+    public static final String TOKEN_CREATED_LOGIN = "Token created - Login";
+    public static final String TOKEN_CREATED_REGISTER = "Token created - Register";
 
     // H2 route
     public static final String H2_ENDPOINT = "/h2-console";

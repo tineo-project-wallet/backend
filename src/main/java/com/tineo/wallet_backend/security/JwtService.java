@@ -39,11 +39,11 @@ public class JwtService {
         try {
             extractAllClaims(token);
         } catch (ExpiredJwtException e) {
-            throw new ExpiredJwtException(e.getHeader(), e.getClaims(), Constant.JWT_EXPIRED_TOKEN + e.getMessage());
+            throw new ExpiredJwtException(e.getHeader(), e.getClaims(), Constant.ERROR_JWT_EXPIRED_TOKEN + e.getMessage());
         } catch (JwtException e) {
-            throw new JwtException(Constant.JWT_INVALID_TOKEN + e.getMessage());
+            throw new JwtException(Constant.ERROR_JWT_INVALID_TOKEN + e.getMessage());
         } catch (IllegalArgumentException e) {
-            throw new JwtException(Constant.JWT_ILLEGAL_TOKEN + e.getMessage());
+            throw new JwtException(Constant.ERROR_JWT_ILLEGAL_TOKEN + e.getMessage());
         }
     }
 
