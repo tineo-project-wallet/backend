@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping(Constant.API_VERSION_USERS)
+@RequestMapping(Constant.API_ENDPOINT_USERS)
 @RequiredArgsConstructor
 public class UserController {
 
@@ -37,7 +37,7 @@ public class UserController {
                 .build());
     }
 
-    @GetMapping(Constant.API_VERSION_USERS_PAGINATE)
+    @GetMapping(Constant.ENDPOINT_USERS_PAGINATE)
     public ResponseEntity<GlobalResponse> findAllPageable(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
@@ -54,11 +54,11 @@ public class UserController {
                 .build());
     }
 
-    @GetMapping(Constant.API_VERSION_USERS_ID)
+    @GetMapping(Constant.ENDPOINT_USERS_ID)
     public ResponseEntity<GlobalResponse> findById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(GlobalResponse.builder()
                 .ok(true)
-                .message(Constant.USER_BY_ID_FOUND)
+                .message(Constant.USER_FOUND_BY_ID)
                 .data(userService.findById(id))
                 .timestamp(LocalDateTime.now())
                 .build());
@@ -74,7 +74,7 @@ public class UserController {
                 .build());
     }
 
-    @PutMapping(Constant.API_VERSION_USERS_ID)
+    @PutMapping(Constant.ENDPOINT_USERS_ID)
     public ResponseEntity<GlobalResponse> update(@RequestBody @Valid UserRequestDTO user, @PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(GlobalResponse.builder()
                 .ok(true)
@@ -84,11 +84,11 @@ public class UserController {
                 .build());
     }
 
-    @DeleteMapping(Constant.API_VERSION_USERS_ID)
+    @DeleteMapping(Constant.ENDPOINT_USERS_ID)
     public ResponseEntity<GlobalResponse> deleteById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(GlobalResponse.builder()
                 .ok(true)
-                .message(Constant.USER_BY_ID_DELETED)
+                .message(Constant.USER_DELETED_BY_ID)
                 .data(userService.deleteById(id))
                 .timestamp(LocalDateTime.now())
                 .build());

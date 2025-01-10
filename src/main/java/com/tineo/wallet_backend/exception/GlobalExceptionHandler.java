@@ -42,13 +42,13 @@ public class GlobalExceptionHandler {
     public ResponseEntity<GlobalResponse> handleTypeMismatchException(MethodArgumentTypeMismatchException ex, HttpServletRequest request) {
         String parameterName = ex.getName();
         String expectedType = ex.getRequiredType() != null ? ex.getRequiredType().getSimpleName() : "desconocido";
-        String message = String.format(Constant.ERROR_PARAMETER_TYPE_MISMATCH, parameterName, expectedType);
+        String message = String.format(Constant.GLOBAL_RESPONSE_ERROR_PARAMETER_TYPE, parameterName, expectedType);
 
         GlobalResponse errorResponse = GlobalResponse.builder()
                 .ok(false)
                 .message(message)
                 .timestamp(LocalDateTime.now())
-                .details(String.format(Constant.ERROR_DETAILS, request.getMethod(), request.getRequestURI()))
+                .details(String.format(Constant.GLOBAL_RESPONSE_ERROR_DETAILS, request.getMethod(), request.getRequestURI()))
                 .build();
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
@@ -67,7 +67,7 @@ public class GlobalExceptionHandler {
                 .ok(false)
                 .message(ex.getMessage())
                 .timestamp(LocalDateTime.now())
-                .details(String.format(Constant.ERROR_DETAILS, request.getMethod(), request.getRequestURI()))
+                .details(String.format(Constant.GLOBAL_RESPONSE_ERROR_DETAILS, request.getMethod(), request.getRequestURI()))
                 .build();
     }
 }

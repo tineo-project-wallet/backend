@@ -62,7 +62,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         GlobalResponse errorResponse = GlobalResponse.builder()
                 .ok(false)
                 .message(message)
-                .details(String.format(Constant.ERROR_DETAILS, request.getMethod(), request.getRequestURI()))
+                .details(String.format(Constant.GLOBAL_RESPONSE_ERROR_DETAILS, request.getMethod(), request.getRequestURI()))
                 .build();
 
         response.setStatus(httpStatus);

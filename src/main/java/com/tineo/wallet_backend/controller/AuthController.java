@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping(Constant.API_VERSION_AUTH)
+@RequestMapping(Constant.API_ENDPOINT_AUTH)
 @RequiredArgsConstructor
 public class AuthController {
 
     private final AuthService authService;
 
-    @PostMapping(Constant.API_VERSION_AUTH_LOGIN)
+    @PostMapping(Constant.ENDPOINT_AUTH_LOGIN)
     public GlobalResponse login(@RequestBody @Valid LoginRequest loginRequest) {
         return GlobalResponse.builder()
                 .ok(true)
@@ -31,7 +31,7 @@ public class AuthController {
                 .build();
     }
 
-    @PostMapping(Constant.API_VERSION_AUTH_REGISTER)
+    @PostMapping(Constant.ENDPOINT_AUTH_REGISTER)
     public GlobalResponse register(@RequestBody @Valid UserRequestDTO userRequestDTO) {
         return GlobalResponse.builder()
                 .ok(true)

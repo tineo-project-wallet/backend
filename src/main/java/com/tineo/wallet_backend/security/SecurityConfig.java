@@ -31,9 +31,9 @@ public class SecurityConfig {
                 .headers((headers) -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(routes -> routes
-                        .requestMatchers(Constant.API_VERSION_AUTH + "/**").permitAll()
-                        .requestMatchers(Constant.API_VERSION_USERS + "/**").authenticated()
-                        .requestMatchers(Constant.H2_ENDPOINT + "/**").permitAll()
+                        .requestMatchers(Constant.API_ENDPOINT_AUTH + "/**").permitAll()
+                        .requestMatchers(Constant.API_ENDPOINT_USERS + "/**").authenticated()
+                        .requestMatchers(Constant.ENDPOINT_H2 + "/**").permitAll()
                         .anyRequest().denyAll()
                 );
         return http.build();
