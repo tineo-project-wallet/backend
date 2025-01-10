@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .headers((headers) -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(routes -> routes
-                        .requestMatchers(Constant.API_VESION_AUTH + "/**").permitAll()
+                        .requestMatchers(Constant.API_VERSION_AUTH + "/**").permitAll()
                         .requestMatchers(Constant.API_VERSION_USERS + "/**").authenticated()
                         .requestMatchers(Constant.H2_ENDPOINT + "/**").permitAll()
                         .anyRequest().denyAll()
