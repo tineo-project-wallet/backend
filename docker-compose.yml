@@ -1,0 +1,47 @@
+services:
+    wallet-db:
+        image: mysql
+        container_name: wallet-db
+        ports:
+            - "3306:3306"
+        networks:
+            - wallet-network
+        volumes:
+            - db-data:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: wallet
+            MYSQL_PASSWORD: wallet
+            MYSQL_DATABASE: wallet_db
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            interval: 10s
+            timeout: 5s
+            retries: 3
+
+    wallet-backend:
+        image: tineojf-spring-image
+        container_name: wallet-backend
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "8080:8080"
+        networks:
+            - wallet-network
+        depends_on:
+            - wallet-db
+        environment:
+            SPRING_ENV_PROFILE: mysql
+            SPRING_ADMIN_USERNAME: admin_123
+            SPRING_ADMIN_PASSWORD: admin_123
+            SPRING_MYSQL_URL: jdbc:mysql://wallet-db:3306/wallet_db?createDatabaseIfNotExist=true
+            SPRING_MYSQL_USERNAME: root
+            SPRING_MYSQL_PASSWORD: root
+
+networks:
+    wallet-network:
+        driver: bridge
+
+volumes:
+    db-data:
