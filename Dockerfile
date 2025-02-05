@@ -24,4 +24,4 @@ RUN ./mvnw clean install -DskipTests
 RUN apt-get update && apt-get install -y netcat-openbsd
 
 # Ejecutar proyecto cuando se inicie el contenedor
-ENTRYPOINT ["sh", "-c", "while ! nc -z reto-db 3306; do sleep 1; done; java -jar /app/target/reto-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["sh", "-c", "while ! nc -z wallet-db 3306; do sleep 1; done; java -jar /app/target/wallet-backend-0.0.1-SNAPSHOT.jar"]
