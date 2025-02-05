@@ -1,5 +1,5 @@
 # Imagen modelo
-FROM eclipse-temurin:21.0.5_11-jdk-ubi9-minimal
+FROM eclipse-temurin:21.0.6_7-jdk
 
 # Puerto de la aplicacion
 EXPOSE 8080
@@ -21,5 +21,7 @@ COPY ./src /app/src
 # Construir proyecto (saltar tests)
 RUN ./mvnw clean install -DskipTests
 
+RUN apt-get update && apt-get install -y netcat-openbsd
+
 # Ejecutar proyecto cuando se inicie el contenedor
-ENTRYPOINT ["java", "-jar", "/app/target/wallet-backend-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["sh", "-c", "while ! nc -z reto-db 3306; do sleep 1; done; java -jar /app/target/reto-0.0.1-SNAPSHOT.jar"]
