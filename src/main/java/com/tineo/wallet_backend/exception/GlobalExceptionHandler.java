@@ -5,11 +5,13 @@ import com.tineo.wallet_backend.dto.global.GlobalResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 
 @ControllerAdvice
@@ -28,7 +30,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 
-    // BadRequestException ! No verificado
+    // BadRequestException
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<GlobalResponse> handleBadRequestException(BadRequestException ex, HttpServletRequest request) {
         GlobalResponse errorResponse = createErrorResponse(ex, request);
@@ -36,6 +38,14 @@ public class GlobalExceptionHandler {
     }
 
     // MethodArgumentNotValidException
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<GlobalResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, HttpServletRequest request) {
+        String message = Objects.requireNonNull(ex.getBindingResult().getFieldError()).getDefaultMessage();
+
+        GlobalResponse errorResponse = createErrorResponse(ex, request);
+        errorResponse.setMessage(message);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
 
     // MethodArgumentMismatchException
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -44,13 +54,8 @@ public class GlobalExceptionHandler {
         String expectedType = ex.getRequiredType() != null ? ex.getRequiredType().getSimpleName() : "desconocido";
         String message = String.format(Constant.GLOBAL_RESPONSE_ERROR_PARAMETER_TYPE, parameterName, expectedType);
 
-        GlobalResponse errorResponse = GlobalResponse.builder()
-                .ok(false)
-                .message(message)
-                .timestamp(LocalDateTime.now())
-                .details(String.format(Constant.GLOBAL_RESPONSE_ERROR_DETAILS, request.getMethod(), request.getRequestURI()))
-                .build();
-
+        GlobalResponse errorResponse = createErrorResponse(ex, request);
+        errorResponse.setMessage(message);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
